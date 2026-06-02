@@ -1,1 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Studio</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fff0f6;
+}
+
+/* Navbar */
+.navbar{
+background:#ff4d88;
+color:#fff;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+}
+
+.profile-icon{
+font-size:26px;
+cursor:pointer;
+}
+
+/* Profile */
+.profile-panel{
+position:absolute;
+top:65px;
+right:10px;
+width:230px;
+background:#fff;
+padding:15px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+display:none;
+z-index:1000;
+}
+
+.profile-panel h3{
+color:#ff4d88;
+margin-bottom:10px;
+}
+
+.profile-panel p{
+font-size:13px;
+margin:5px 0;
+color:#555;
+}
+
+/* Location */
+.location{
+background:#fff;
+padding:10px;
+text-align:center;
+font-size:14px;
+color:#666;
+}
+
+/* Categories */
+.category-section{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:15px;
+}
+
+.category{
+background:#fff;
+padding:12px 18px;
+border-radius:25px;
+cursor:pointer;
+font-weight:600;
+color:#ff4d88;
+white-space:nowrap;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.category.active{
+background:#ff4d88;
+color:#fff;
+}
+
+/* Services */
+.services{
+padding:15px;
+}
+
+.service-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+}
+
+.card{
+background:#fff;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
+}
+
+.card-content{
+padding:12px;
+}
+
+.card h3{
+color:#ff4d88;
+margin-bottom:10px;
+}
+
+.btn-group{
+display:flex;
+gap:8px;
+}
+
+.btn{
+flex:1;
+padding:8px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.add-btn{
+background:#ffd1e0;
+}
+
+.book-btn{
+background:#ff4d88;
+color:#fff;
+}
+
+/* Booking Page */
+#bookingPage{
+display:none;
+padding:20px;
+}
+
+.booking-form{
+background:#fff;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+max-width:500px;
+margin:auto;
+}
+
+.booking-form h2{
+color:#ff4d88;
+margin-bottom:15px;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea{
+width:100%;
+padding:12px;
+margin-bottom:12px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+.booking-form button{
+width:100%;
+padding:12px;
+background:#ff4d88;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* Success Page */
+#successPage{
+display:none;
+height:80vh;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+.success{
+width:90px;
+height:90px;
+border-radius:50%;
+background:#4CAF50;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:40px;
+color:white;
+}
+
+.home-btn{
+margin-top:20px;
+padding:12px 25px;
+background:#ff4d88;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+<div class="logo">💄 Beauty Studio</div>
+<div class="profile-icon" onclick="toggleProfile()">👤</div>
+</div>
+
+<!-- Profile -->
+<div class="profile-panel" id="profilePanel">
+<h3>User Profile</h3>
+<p><b>Name:</b> Sailaja</p>
+<p><b>Email:</b> user@gmail.com</p>
+<p><b>Phone:</b> +91 9876543210</p>
+<p><b>Location:</b> tanuku </p>
+</div>
+
+<!-- Home Page -->
+<div id="homePage">
+
+<div class="location">
+📍 tanuku, Andhra Pradesh | Open 9:00 AM - 8:00 PM
+</div>
+
+<div class="category-section">
+<div class="category active" onclick="showCategory('services',this)">Services</div>
+<div class="category" onclick="showCategory('beauty',this)">Beauty</div>
+<div class="category" onclick="showCategory('treatments',this)">Treatments</div>
+</div>
+
+<!-- Services -->
+<div id="servicesSection" class="services">
+
+<div class="service-grid">
+
+<div class="card">
+<img src="besss/be3.webp">
+<div class="card-content">
+<h3>Bridal Makeup</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Bridal Makeup')">Book</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="besss/be2.webp">
+<div class="card-content">
+<h3>Party Makeup</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Party Makeup')">Book</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="besss/images (1).webp">
+<div class="card-content">
+<h3>Glossy Makeup</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Glossy Makeup')">Book</button>
+</div>
+</div>
+</div> <!-- Mehendi Designing -->
+<div class="card">
+<img src="besss/i5.webp">
+<div class="card-content">
+<h3>Mehendi Designing</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Mehendi Designing')">Book</button>
+</div>
+</div>
+</div>
+
+<!-- Saree Draping -->
+<div class="card">
+<img src="besss/h5.webp">
+<div class="card-content">
+<h3>Saree Draping</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Saree Draping')">Book</button>
+</div>
+</div>
+</div>
+
+<!-- Hair Dressing -->
+<div class="card">
+<img src="besss/h1 (2).webp">
+<div class="card-content">
+<h3>Hair Dressing</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Hair Dressing')">Book</button>
+</div>
+</div>
+</div>
+
+</div>
+</div> 
+
+<!-- Beauty -->
+<div id="beautySection" class="services" style="display:none">
+
+<div class="service-grid">
+
+<div class="card">
+<img src="besss/be1.webp">
+<div class="card-content">
+<h3>Facial</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Facial')">Book</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="besss/be7.webp">
+<div class="card-content">
+<h3>Hair Cut</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Hair Cut')">Book</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="besss/be6 (1).webp">
+<div class="card-content">
+<h3>Pedicure</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Pedicure')">Book</button>
+</div>
+</div>
+</div> <!-- Waxing -->
+<div class="card">
+<img src="besss/i1.webp">
+<div class="card-content">
+<h3>Waxing</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Waxing')">Book</button>
+</div>
+</div>
+</div>
+
+<!-- Threading -->
+<div class="card">
+<img src="besss/i3.webp">
+<div class="card-content">
+<h3>Threading</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Threading')">Book</button>
+</div>
+</div>
+</div>
+
+<!-- Manicure -->
+<div class="card">
+<img src="besss/i2.webp">
+<div class="card-content">
+<h3>Manicure</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Manicure')">Book</button>
+</div>
+</div>
+</div>
+
+</div>
+</div> 
+
+<!-- Treatments -->
+<div id="treatmentsSection" class="services" style="display:none">
+
+<div class="service-grid">
+
+<div class="card">
+<img src="besss/be6.webp">
+<div class="card-content">
+<h3>Chemical Peels</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Chemical Peels')">Book</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="besss/be9.webp">
+<div class="card-content">
+<h3>Botox Treatment</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Botox Treatment')">Book</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="besss/i9.webp">
+<div class="card-content">
+<h3>Laser Resurfacing</h3>
+<div class="btn-group">
+<button class="btn add-btn">Add</button>
+<button class="btn book-btn" onclick="openBooking('Laser Resurfacing')">Book</button>
+</div>
+</div>
+</div> <!-- Dermal Fillers -->
+<div class="card">
+    <img src="besss/h3 (2).webp" alt="Dermal Fillers">
+    <div class="card-content">
+        <h3>Dermal Fillers</h3>
+        <div class="btn-group">
+            <button class="btn add-btn">Add</button>
+            <button class="btn book-btn" onclick="openBooking('Dermal Fillers')">
+                Book
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Laser Hair Removal -->
+<div class="card">
+    <img src="besss/be8.webp" alt="Laser Hair Removal">
+    <div class="card-content">
+        <h3>Laser Hair Removal</h3>
+        <div class="btn-group">
+            <button class="btn add-btn">Add</button>
+            <button class="btn book-btn" onclick="openBooking('Laser Hair Removal')">
+                Book
+            </button>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<!-- Booking Page -->
+<div id="bookingPage">
+
+<div class="booking-form">
+
+<h2>📅 Appointment Booking</h2>
+
+<input type="text" id="serviceName" readonly>
+
+<input type="text" placeholder="Enter Your Name">
+
+<input type="tel" placeholder="Phone Number">
+
+<input type="email" placeholder="Email Address">
+
+<input type="date">
+
+<select>
+<option>Select Time Slot</option>
+<option>10:00 AM</option>
+<option>11:00 AM</option>
+<option>12:00 PM</option>
+<option>02:00 PM</option>
+<option>04:00 PM</option>
+<option>06:00 PM</option>
+</select>
+
+<textarea placeholder="Additional Notes"></textarea>
+
+<button onclick="confirmBooking()">Confirm Appointment</button>
+
+</div>
+
+</div>
+
+<!-- Success Page -->
+<div id="successPage">
+
+<div class="success">✓</div>
+
+<h2 style="margin-top:15px;color:#4CAF50;">
+Booking Successful
+</h2>
+
+<p style="margin-top:10px;color:#666;">
+Your appointment has been booked successfully.
+</p>
+
+<button class="home-btn" onclick="goHome()">
+Back To Home
+</button>
+
+</div>
+
+<script>
+function toggleProfile(){
+let panel=document.getElementById("profilePanel");
+panel.style.display=panel.style.display==="block"?"none":"block";
+}
+
+function showCategory(category,element){
+
+document.getElementById("servicesSection").style.display="none";
+document.getElementById("beautySection").style.display="none";
+document.getElementById("treatmentsSection").style.display="none";
+
+if(category==="services"){
+document.getElementById("servicesSection").style.display="block";
+}
+
+if(category==="beauty"){
+document.getElementById("beautySection").style.display="block";
+}
+
+if(category==="treatments"){
+document.getElementById("treatmentsSection").style.display="block";
+}
+
+document.querySelectorAll(".category").forEach(cat=>{
+cat.classList.remove("active");
+});
+
+element.classList.add("active");
+}
+
+function openBooking(service){
+document.getElementById("homePage").style.display="none";
+document.getElementById("bookingPage").style.display="block";
+document.getElementById("serviceName").value=service;
+}
+
+function confirmBooking(){
+document.getElementById("bookingPage").style.display="none";
+document.getElementById("successPage").style.display="flex";
+}
+
+function goHome(){
+document.getElementById("successPage").style.display="none";
+document.getElementById("homePage").style.display="block";
+}
+</script>
+
+</body>
+</html>
